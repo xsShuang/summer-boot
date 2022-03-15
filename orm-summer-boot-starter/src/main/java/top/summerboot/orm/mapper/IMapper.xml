@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.summerboot.orm.mapper.IMapper">
+
+    <insert id="insert">
+
+    </insert>
+
+    <update id="update">
+        update ${tableName}
+        <if test="ew != null and ew.sqlSet != null">
+            ${ew.sqlSet}
+        </if>
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+    </update>
+
+    <delete id="delete">
+        delete from ${tableName}
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+    </delete>
+
+    <select id="selectOne" resultType="com.alibaba.fastjson.JSONObject">
+        select
+        <choose>
+            <when test="ew != null and ew.sqlSelect != null">
+                ${ew.sqlSelect}
+            </when>
+            <otherwise>
+                *
+            </otherwise>
+        </choose>
+        from ${tableName}
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+    </select>
+
+    <select id="selectList" resultType="com.alibaba.fastjson.JSONObject">
+        select
+        <choose>
+            <when test="ew != null and ew.sqlSelect != null">
+                ${ew.sqlSelect}
+            </when>
+            <otherwise>
+                *
+            </otherwise>
+        </choose>
+        from ${tableName}
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Long">
+        select count(*)
+        from ${tableName}
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+    </select>
+
+    <select id="selectPage" resultType="com.alibaba.fastjson.JSONObject">
+        select
+        <choose>
+            <when test="ew != null and ew.sqlSelect != null">
+                ${ew.sqlSelect}
+            </when>
+            <otherwise>
+                *
+            </otherwise>
+        </choose>
+        from ${tableName}
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+    </select>
+
+    <update id="ddl">
+        ${sql}
+    </update>
+
+    <insert id="insertBySql">
+        ${sql}
+    </insert>
+
+    <update id="updateBySql">
+        ${sql}
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+    </update>
+
+    <delete id="deleteBySql">
+        ${sql}
+    </delete>
+
+    <select id="selectOneBySql" resultType="com.alibaba.fastjson.JSONObject">
+        ${sql}
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+    </select>
+
+    <select id="selectListBySql" resultType="com.alibaba.fastjson.JSONObject">
+        ${sql}
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+    </select>
+
+    <select id="selectCountBySql" resultType="java.lang.Long">
+        ${sql}
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+    </select>
+
+    <select id="selectPageBySql" resultType="com.alibaba.fastjson.JSONObject">
+        ${sql}
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+    </select>
+
+    <select id="getObjectBySql" resultType="java.lang.Object">
+        ${sql}
+        <if test="ew != null">
+            ${ew.customSqlSegment}
+        </if>
+    </select>
+</mapper>
